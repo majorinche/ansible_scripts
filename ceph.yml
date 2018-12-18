@@ -1,0 +1,51 @@
+---
+- hosts: all
+  tasks:
+    - name: copy yum file
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/software_files/config/ceph/ceph.repo",
+            dest: "/etc/yum.repos.d/ceph.repo" } 
+    - name: copy static-routes
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/python_tools/static-routes",
+            dest: "/etc/sysconfig/static-routes" } 
+    - name: install epel-release
+      yum: name=epel-release state=latest
+    - name: install ceph
+      yum: name=ceph state=latest
+    - name: install ceph-radosgw
+      yum: name=ceph-radosgw state=latest
+    - name: change lvm.conf for ssd
+      lineinfile:
+         dest: /etc/lvm/lvm.conf
+         regexp: '# types ='
+         line: 'types = [ "shannon", 16 ]'
+    - name: install ntp
+      yum: name=ntp state=latest
+    - name: copy ntp.conf
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/python_tools/ceph_ntp.conf",
+            dest: "/etc/ntp.conf" }
+    - name: start ntp and enable
+      service: name=ntpd state=started enabled=yes

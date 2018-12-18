@@ -1,0 +1,11 @@
+---
+- hosts: mgmt
+  tasks:
+    - name: "install ntpd"
+      yum: name=ntp state=present
+#      command: yum install --quiet -y ntpd ntpd-devel
+    - name: "check ntpd"
+      service: name=ntpd state=restarted
+#      command: service ntpd status
+    - name: "echk ntp"
+      command: ntpq -p

@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+    - name: change ip address from server to proxy
+      lineinfile:
+         dest: /home/zabbix/conf/zabbix_agentd.conf
+         regexp: '^Server='
+         line: 'Server=172.16.24.225'
+    - name: copy control_zabbix_agentd.sh
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/python_tools/control_zabbix_agentd.sh",
+            dest: "/home/zabbix/control_zabbix_agentd.sh" } 

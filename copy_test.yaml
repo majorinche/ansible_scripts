@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: copy test file
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/ansible/test",
+            dest: "/root/test" } 

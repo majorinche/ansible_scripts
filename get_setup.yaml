@@ -1,0 +1,6 @@
+---
+- hosts: all 
+  tasks:
+    - name: get setup info
+      setup: filter=ansible_os_family 
+

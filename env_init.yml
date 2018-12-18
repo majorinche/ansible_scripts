@@ -1,0 +1,34 @@
+---
+- hosts: dsj4
+  tasks:
+    - name: copy centos74 repo
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/python_tools/centos74.repo",
+            dest: "/etc/yum.repos.d/centos74.repo" } 
+    - name: install ntp
+      yum:
+         name: ntp
+         state: latest
+    - name: copy ntp.conf
+      copy:
+         src: "{{ item.src }}"
+         dest: "{{ item.dest }}"
+         owner: root
+         group: root
+         mode: 0644
+      with_items:
+         - {
+            src: "/root/python_tools/ntp.conf",
+            dest: "/etc/ntp.conf" } 
+    - name: start ntp and enable
+      service: 
+         name: ntpd
+         state: started 
+         enabled: yes
