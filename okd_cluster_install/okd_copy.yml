@@ -1,0 +1,15 @@
+---
+- hosts: all 
+  tasks:
+    - name : copy repo to remote
+      copy: 
+        src: /etc/yum.repos.d/internal.repo
+        dest: /etc/yum.repos.d/internal.repo
+    - name: copy docker scripts to remote
+      copy:
+        src: /root/pull_okd_images.sh
+        dest: /root/pull_okd_images.sh
+    - name: copy ssl to remote
+      copy:
+        src: /root/ssl_config.sh
+        dest: /root/ssl_config.sh
