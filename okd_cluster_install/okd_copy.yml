@@ -9,7 +9,9 @@
       copy:
         src: /root/pull_okd_images.sh
         dest: /root/pull_okd_images.sh
+        mode: 0644
     - name: copy ssl to remote
       copy:
         src: /root/ssl_config.sh
         dest: /root/ssl_config.sh
+        mode: 0644
