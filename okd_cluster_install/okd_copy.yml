@@ -1,7 +1,7 @@
 ---
 - hosts: all 
   tasks:
-    - name : copy repo to remote
+    - name: copy repo to remote
       copy: 
         src: /etc/yum.repos.d/internal.repo
         dest: /etc/yum.repos.d/internal.repo
@@ -9,9 +9,30 @@
       copy:
         src: /root/pull_okd_images.sh
         dest: /root/pull_okd_images.sh
-        mode: 0644
+        mode: 0500
     - name: copy ssl to remote
       copy:
         src: /root/ssl_config.sh
         dest: /root/ssl_config.sh
-        mode: 0644
+        mode: 0500
+    - name: find CentOS repo files
+      find: 
+        paths: /etc/yum.repos.d
+        patterns: CentOS*.repo
+      register: wait_to_delete
+    - name: delete CentOS repo files
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ wait_to_delete.files }}"
+- hosts: okd00
+  tasks:
+    - name: copy docker ssl to remote
+      copy:
+        src: /etc/docker/certs.d/docker-repo.sonic.com
+        dest: /etc/docker/certs.d/
+        mode: 0755 
+    - name: restart docker
+      shell: service docker restart
+    - name: append crt to bundle
+      shell: cat /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt >> /etc/pki/tls/certs/ca-bundle.crt
