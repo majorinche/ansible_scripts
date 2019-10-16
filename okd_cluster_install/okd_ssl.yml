@@ -1,0 +1,14 @@
+---
+- hosts: okd-gl
+  tasks:
+    - name: make sure docker exist
+      shell: yum -y install docker
+    - name: copy docker ssl to remote
+      copy:
+        src: /etc/docker/certs.d/docker-repo.sonic.com
+        dest: /etc/docker/certs.d/
+        mode: 0755 
+    - name: restart docker
+      shell: service docker restart
+    - name: append crt to bundle
+      shell: cat /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt >> /etc/pki/tls/certs/ca-bundle.crt

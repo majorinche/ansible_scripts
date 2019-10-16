@@ -1,5 +1,5 @@
 ---
-- hosts: all 
+- hosts: okd-gl 
   tasks:
     - name: copy repo to remote
       copy: 
@@ -25,14 +25,3 @@
         path: "{{ item.path }}"
         state: absent
       with_items: "{{ wait_to_delete.files }}"
-- hosts: okd00
-  tasks:
-    - name: copy docker ssl to remote
-      copy:
-        src: /etc/docker/certs.d/docker-repo.sonic.com
-        dest: /etc/docker/certs.d/
-        mode: 0755 
-    - name: restart docker
-      shell: service docker restart
-    - name: append crt to bundle
-      shell: cat /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt >> /etc/pki/tls/certs/ca-bundle.crt
