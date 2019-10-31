@@ -7,12 +7,12 @@
         dest: /etc/yum.repos.d/internal.repo
     - name: copy docker scripts to remote
       copy:
-        src: /root/pull_okd_images.sh
+        src: /root/go/src/github.com/majorinche/ansible_scripts/okd_cluster_install/pull_okd_images.sh
         dest: /root/pull_okd_images.sh
         mode: 0500
     - name: copy ssl to remote
       copy:
-        src: /root/ssl_config.sh
+        src: /root/go/src/github.com/majorinche/ansible_scripts/okd_cluster_install/ssl_config.sh
         dest: /root/ssl_config.sh
         mode: 0500
     - name: find CentOS repo files
