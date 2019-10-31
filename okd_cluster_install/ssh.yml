@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: rdma
   gather_facts: no
   tasks:
   - name: install ssh key

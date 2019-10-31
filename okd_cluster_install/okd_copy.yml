@@ -1,5 +1,5 @@
 ---
-- hosts: okd-gl 
+- hosts: rdma 
   tasks:
     - name: copy repo to remote
       copy: 
