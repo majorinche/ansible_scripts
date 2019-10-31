@@ -1,17 +1,9 @@
 #!/bin/sh
-
-batch_copy(){
-
-	for i in `seq 2 3`;do 
-		scp -rp okd02:/etc/docker/certs.d/docker-repo.sonic.com okd00${i}:/etc/docker/certs.d/
-		ssh okd00${i} mv /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.cert /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt
-		ssh okd00${i} service docker restart
-	done
-}
+this script has been depricate, just for record
 
 single_copy(){
 	yum -y install docker
-	scp -rp git:/etc/docker/certs.d/docker-repo.sonic.com /etc/docker/certs.d/
+	scp -rp harbor:/etc/docker/certs.d/docker-repo.sonic.com /etc/docker/certs.d/
         mv /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.cert /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt
 	service docker restart
 	cat /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt >> /etc/pki/tls/certs/ca-bundle.crt
