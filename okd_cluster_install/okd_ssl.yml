@@ -11,4 +11,5 @@
     - name: restart docker
       shell: service docker restart
     - name: append crt to bundle
+      # 确保crt文件是存在，默认只有cert文件，需要提前复制一下
       shell: cat /etc/docker/certs.d/docker-repo.sonic.com/docker-repo.sonic.com.crt >> /etc/pki/tls/certs/ca-bundle.crt
