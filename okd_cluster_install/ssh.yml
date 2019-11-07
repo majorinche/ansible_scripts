@@ -1,5 +1,5 @@
 ---
-- hosts: rdma
+- hosts: okd-calico
   gather_facts: no
   tasks:
   - name: install ssh key

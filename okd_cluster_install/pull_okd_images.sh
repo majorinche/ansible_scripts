@@ -21,4 +21,8 @@ docker pull docker-repo.sonic.com:443/openshift/prometheus-node-exporter:v0.16.0
 docker tag docker-repo.sonic.com:443/openshift/prometheus-node-exporter:v0.16.0 openshift/prometheus-node-exporter:v0.16.0
 docker pull docker-repo.sonic.com:443/coreos/kube-rbac-proxy:v0.3.1
 docker tag docker-repo.sonic.com:443/coreos/kube-rbac-proxy:v0.3.1 coreos/kube-rbac-proxy:v0.3.1
+docker pull docker-repo.sonic.com:443/calico/cni:v3.1.3
+docker pull docker-repo.sonic.com:443/calico/kube-controllers:v3.1.3
+docker pull docker-repo.sonic.com:443/calico/node:v3.1.3
+docker pull docker-repo.sonic.com:443/calico/upgrade:v1.0.5
 

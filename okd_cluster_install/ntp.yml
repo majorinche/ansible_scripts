@@ -1,0 +1,16 @@
+---
+- hosts: rdma
+  tasks:
+    - name: "install ntpd"
+      yum: name=ntp state=present
+    - name: copy docker scripts to remote
+      copy:
+        src: /root/go/src/github.com/majorinche/ansible_scripts/okd_cluster_install/ntp.conf
+        dest: /etc/ntp.conf
+        mode: 0500
+    - name: "manual ntpdate"
+      shell: ntpdate 10.20.0.227
+    - name: "check ntpd"
+      service: name=ntpd state=restarted
+    - name: "echo ntp"
+      command: ntpq -p
