@@ -25,4 +25,5 @@ docker pull docker-repo.sonic.com:443/calico/cni:v3.1.3
 docker pull docker-repo.sonic.com:443/calico/kube-controllers:v3.1.3
 docker pull docker-repo.sonic.com:443/calico/node:v3.1.3
 docker pull docker-repo.sonic.com:443/calico/upgrade:v1.0.5
-
+docker pull docker-repo.sonic.com:443/nfvpe/multus:v3.2
+docker tag docker-repo.sonic.com:443/nfvpe/multus:v3.2 nfvpe/multus:v3.2

@@ -1,5 +1,5 @@
 ---
-- hosts: rdma
+- hosts: gl
   tasks:
     - name: "install ntpd"
       yum: name=ntp state=present
@@ -8,6 +8,8 @@
         src: /root/go/src/github.com/majorinche/ansible_scripts/okd_cluster_install/ntp.conf
         dest: /etc/ntp.conf
         mode: 0500
+    - name: stop ntpd if has
+      service: name=ntpd state=stopped
     - name: "manual ntpdate"
       shell: ntpdate 10.20.0.227
     - name: "check ntpd"

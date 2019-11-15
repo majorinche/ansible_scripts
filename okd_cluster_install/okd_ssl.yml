@@ -1,5 +1,5 @@
 ---
-- hosts: okd-calico
+- hosts: rdma
   tasks:
     - name: make sure docker exist
       shell: yum -y install docker

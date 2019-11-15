@@ -1,5 +1,5 @@
 ---
-- hosts: okd-calico 
+- hosts: rdma
   tasks:
     - name: copy yum repo to remote
       copy: 
@@ -12,7 +12,7 @@
         mode: 0500
     - name: find CentOS repo files
       find: 
-        paths: /etc/yum.repos.d
+        paths: /etc/yum.repos.d/
         patterns: CentOS*.repo
       register: wait_to_delete
     - name: delete CentOS repo files
