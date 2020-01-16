@@ -1,0 +1,8 @@
+---
+- hosts: rdma
+  tasks:
+    - name: copy pull_okd_images.sh
+      copy:
+        src: /root/go/src/github.com/majorinche/ansible_scripts/okd_cluster_install/pull_okd_images.sh
+        dest: /root/pull_okd_images.sh
+        mode: 0500
