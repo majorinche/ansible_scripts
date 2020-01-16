@@ -1,5 +1,5 @@
 ---
-- hosts: rdma
+- hosts: tfjob
   tasks:
     - name: make sure docker exist
       shell: yum -y install docker
